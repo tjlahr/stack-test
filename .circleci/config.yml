@@ -9,7 +9,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "e3:6f:b1:0c:9d:70:fa:5e:04:c0:11:69:55:14:9d:ee"
+            - "57:94:7e:e4:33:00:d5:86:1d:8e:e3:d2:e5:d8:f3:ea"
       - checkout
       - run: echo "A first hello"
       - run: mkdir -p my_workspace
@@ -19,7 +19,7 @@ jobs:
           paths:
             - echo-output
   two:
-    docker:
+    docker: 
       - image: circleci/ruby:2.4.1
         auth:
           username: tjlahr
@@ -27,7 +27,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "e3:6f:b1:0c:9d:70:fa:5e:04:c0:11:69:55:14:9d:ee"
+            - "57:94:7e:e4:33:00:d5:86:1d:8e:e3:d2:e5:d8:f3:ea"
       - checkout
       - run: echo "A more familiar hi"
       - attach_workspace:
