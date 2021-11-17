@@ -9,7 +9,12 @@ jobs:
     steps:
       - checkout
       - run: echo "A first hello"
-      - run: sleep 25
+      - run: mkdir -p my_workspace
+      - run: echo "Trying out workspaces" > my_workspace/echo-output
+      - persist_to_workspace:
+          root: my_workspace
+          paths:
+            - echo-output
   two:
     docker:
       - image: circleci/ruby:2.4.1
@@ -19,11 +24,17 @@ jobs:
     steps:
       - checkout
       - run: echo "A more familiar hi"
-      - run: sleep 15
+      - attach_workspace:
+          at: my_workspace
+
+      - run: echo $(cat my_workspace/echo-output)
+
 
 workflows:
   version: 2
   one_and_two:
     jobs:
       - one
-      - two
+      - two:
+          requires:
+            - one
